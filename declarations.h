@@ -5,7 +5,11 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
-#include "functions.cpp"
+#include <cstring>
 using namespace std;
+
+void checkChoice(int &choice);
+string readFile();
+void hashFunction(string inputHash);
 
 #endif

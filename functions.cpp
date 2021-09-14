@@ -6,9 +6,9 @@ void checkChoice(int &choice) {
         cout << "Repeat your choice: ";
         cin >> choice; 
     }
-}
+};
 
-void readFile(){
+string readFile(){
     string fileName, input;
 
     cout << "Enter file name: ";
@@ -30,5 +30,21 @@ void readFile(){
 
     getline(inp, input);
     cout << "Text found: " << input << endl;
+    inp.close();
 
-}
+    return input;
+
+};
+
+void hashFunction(string inputHash){
+    int wordsCounter = 1;
+    const char *str = inputHash.c_str();
+
+    for(int i = 0; str[i] != '\0'; i++){
+        if(str[i] == ' ')
+            wordsCounter++;
+    }
+
+    cout << inputHash << endl;
+    cout << wordsCounter;
+};
