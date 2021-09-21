@@ -36,15 +36,120 @@ string readFile(){
 
 };
 
-void hashFunction(string inputHash){
-    int wordsCounter = 1;
-    const char *str = inputHash.c_str();
+int countWords(string str)
+{
+    
+    stringstream counter(str);
+    string word;
+  
+    int wordsCount = 0;
+    while (counter >> word)
+        wordsCount++;
+    return wordsCount;
+}
 
-    for(int i = 0; str[i] != '\0'; i++){
-        if(str[i] == ' ')
-            wordsCounter++;
+string HexToBin(string hexdec)
+{
+    long int i = 0;
+ 
+    string binary;
+    while (hexdec[i]) {
+ 
+        switch (hexdec[i]) {
+        case '0':
+            binary += "0000";
+            break;
+        case '1':
+            binary += "0001";
+            break;
+        case '2':
+            binary += "0010";
+            break;
+        case '3':
+            binary += "0011";
+            break;
+        case '4':
+            binary += "0100";
+            break;
+        case '5':
+            binary += "0101";
+            break;
+        case '6':
+            binary += "0110";
+            break;
+        case '7':
+            binary += "0111";
+            break;
+        case '8':
+            binary += "1000";
+            break;
+        case '9':
+            binary += "1001";
+            break;
+        case 'A':
+        case 'a':
+            binary += "1010";
+            break;
+        case 'B':
+        case 'b':
+            binary += "1011";
+            break;
+        case 'C':
+        case 'c':
+            binary += "1100";
+            break;
+        case 'D':
+        case 'd':
+            binary += "1101";
+            break;
+        case 'E':
+        case 'e':
+            binary += "1110";
+            break;
+        case 'F':
+        case 'f':
+            binary += "1111";
+            break;
+        default:
+            cout << "\nInvalid hexadecimal digit "
+                 << hexdec[i];
+        }
+        i++;
     }
+    return binary;
+}
+
+void hashFunction(string inputHash){
 
     cout << inputHash << endl;
-    cout << wordsCounter;
+    cout << countWords(inputHash) << endl;
+
+    // Inputą paverčiam hexu
+    string hexString;
+    stringstream toHex;
+
+    for (const auto &item : inputHash) {
+        toHex << hex << int(item);
+    };
+    hexString = toHex.str();
+    cout << "hex: " << hexString << endl;
+
+    string dividedReversedBin;
+    string hashedHex;
+
+    for (unsigned i = 0; i < hexString.length(); i += countWords(inputHash)) {
+        string dividedHex;
+        dividedHex = hexString.substr(i, countWords(inputHash));   // hexą padalinam po tiek char kiek inpute žodžių
+
+        string dividedBin = HexToBin(dividedHex);   // padalintą hexą paveriam dvejetainiu
+        
+        dividedReversedBin += string(dividedBin.rbegin(), dividedBin.rend());   // gautą dvejetainį apverčiam
+
+    
+    };
+
+    cout << HexToBin(hexString) << endl;
+    cout << dividedReversedBin << endl;
+
+    
 };
