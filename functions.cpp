@@ -119,6 +119,48 @@ string HexToBin(string hexdec)
     return binary;
 }
 
+string BinToHex(string hexdec)
+{
+ 
+    string hexas;
+ 
+    if(hexdec == "0000")
+        hexas = "0";
+    else if (hexdec == "0001")
+        hexas = "1";
+    else if (hexdec == "0010")
+        hexas = "2";
+    else if (hexdec == "0011")
+        hexas = "3";
+    else if (hexdec == "0100")
+        hexas = "4";
+    else if (hexdec == "0101")
+        hexas = "5";
+    else if (hexdec == "0110")
+        hexas = "6";
+    else if (hexdec == "0111")
+        hexas = "7";
+    else if (hexdec == "1000")
+        hexas = "8";
+    else if (hexdec == "1001")
+        hexas = "9";
+    else if (hexdec == "1010")
+        hexas = "a";
+    else if (hexdec == "1011")
+        hexas = "b";
+    else if (hexdec == "1100")
+        hexas = "c";
+    else if (hexdec == "1101")
+        hexas = "d";
+    else if (hexdec == "1110")
+        hexas = "e";
+    else if (hexdec == "1111")
+        hexas = "f";
+
+    return hexas;
+}
+
+
 void hashFunction(string inputHash){
 
     cout << inputHash << endl;
@@ -135,11 +177,12 @@ void hashFunction(string inputHash){
     cout << "hex: " << hexString << endl;
 
     string dividedReversedBin;
-    string hashedHex;
-
+   
     for (unsigned i = 0; i < hexString.length(); i += countWords(inputHash)) {
         string dividedHex;
         dividedHex = hexString.substr(i, countWords(inputHash));   // hexą padalinam po tiek char kiek inpute žodžių
+
+        
 
         string dividedBin = HexToBin(dividedHex);   // padalintą hexą paveriam dvejetainiu
         
@@ -148,8 +191,18 @@ void hashFunction(string inputHash){
     
     };
 
+    string binaryToHex;
+
+    for (int j = 0; j < dividedReversedBin.length(); j += 4) {
+        string converting;
+        converting = dividedReversedBin.substr(j, 4);   // binary padalinam po 4
+        binaryToHex += BinToHex(converting);
+    
+    };
+
     cout << HexToBin(hexString) << endl;
     cout << dividedReversedBin << endl;
+    cout << binaryToHex;
 
     
 };

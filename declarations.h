@@ -7,7 +7,6 @@
 #include <string>
 #include <cstring>
 #include <sstream>
-#include <bitset>
 using namespace std;
 
 void checkChoice(int &choice);
