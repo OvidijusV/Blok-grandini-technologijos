@@ -201,7 +201,7 @@ void hashFunction(string inputHash){
     };
 
     cout << HexToBin(hexString) << endl;
-    cout << dividedReversedBin << endl;
+    cout << dividedReversedBin << endl; 
     cout << binaryToHex;
 
     
