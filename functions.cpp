@@ -166,43 +166,5 @@ void hashFunction(string inputHash){
     cout << inputHash << endl;
     cout << countWords(inputHash) << endl;
 
-    // Inputą paverčiam hexu
-    string hexString;
-    stringstream toHex;
-
-    for (const auto &item : inputHash) {
-        toHex << hex << int(item);
-    };
-    hexString = toHex.str();
-    cout << "hex: " << hexString << endl;
-
-    string dividedReversedBin;
-   
-    for (unsigned i = 0; i < hexString.length(); i += countWords(inputHash)) {
-        string dividedHex;
-        dividedHex = hexString.substr(i, countWords(inputHash));   // hexą padalinam po tiek char kiek inpute žodžių
-
-        
-
-        string dividedBin = HexToBin(dividedHex);   // padalintą hexą paveriam dvejetainiu
-        
-        dividedReversedBin += string(dividedBin.rbegin(), dividedBin.rend());   // gautą dvejetainį apverčiam
-
-    
-    };
-
-    string binaryToHex;
-
-    for (int j = 0; j < dividedReversedBin.length(); j += 4) {
-        string converting;
-        converting = dividedReversedBin.substr(j, 4);   // binary padalinam po 4
-        binaryToHex += BinToHex(converting);
-    
-    };
-
-    cout << HexToBin(hexString) << endl;
-    cout << dividedReversedBin << endl; 
-    cout << binaryToHex;
-
     
 };
