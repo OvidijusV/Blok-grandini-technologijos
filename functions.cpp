@@ -170,8 +170,29 @@ void hashFunction(string inputHash){
     for(int i = 0; i < inputHash.size(); i++){
         mixing = mixing * inputHash.at(i) - secret * inputHash.length();
     }
-    cout << mixing;
+    cout << mixing << endl;
 
-    string secretString = to_string(mixing);
+    string mixingString = to_string(mixing);
+    
+    int variable = 15;
 
+    while(mixingString.length() != 64){
+        int a = mixing / variable + secret / variable;
+        mixingString += to_string(a);
+        variable++;
+    }
+    
+    cout << mixingString << endl;
+
+    bitset<256> initialSet(HexToBin(mixingString));
+
+    string binaryToHex;
+
+    for (int j = 0; j < initialSet.size(); j += 4) {
+        string converting;
+        converting = initialSet.flip().to_string().substr(j, 4);   // binary padalinam po 4
+        binaryToHex += BinToHex(converting);
+    
+    };
+    cout << binaryToHex;
 };

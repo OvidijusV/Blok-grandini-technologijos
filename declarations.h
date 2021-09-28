@@ -8,6 +8,7 @@
 #include <cstring>
 #include <sstream>
 #include <bitset>
+#include <math.h>
 using namespace std;
 
 void checkChoice(int &choice);
