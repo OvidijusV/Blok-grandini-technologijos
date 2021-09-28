@@ -1,19 +1,15 @@
 #include "declarations.h"
 
 void checkChoice(int &choice) {
-    while(choice != 1 && choice != 2){
+    while(choice != 1 && choice != 2 && choice != 3){
         cout << "Wrong choice. It can be only (1) or (2)." << endl;
         cout << "Repeat your choice: ";
         cin >> choice; 
     }
 };
 
-string readFile(){
-    string fileName, input;
-
-    cout << "Enter file name: ";
-    cin >> fileName;
-    fileName = fileName + ".txt";
+string readFile(string fileName){
+    string input;
 
     ifstream inp;
 
@@ -29,7 +25,7 @@ string readFile(){
     }
 
     getline(inp, input);
-    cout << "Text found: " << input << endl;
+    cout << "Input found: " << input << endl;
     inp.close();
 
     return input;
@@ -160,29 +156,50 @@ string BinToHex(string hexdec)
     return hexas;
 }
 
+void generateFile(string fileName, int numOfChar){
+
+
+    ofstream generate;
+    generate.open(fileName);
+
+    string s;
+    static const char alphanum[] =
+            "0123456789"
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            "abcdefghijklmnopqrstuvwxyz";
+
+    for (int i = 0; i < numOfChar; ++i) {
+        s+= alphanum[rand() % (sizeof(alphanum) - 1)];
+    };
+
+    generate << s;
+    generate.close();
+};
+
+
 
 void hashFunction(string inputHash){
 
-    cout << inputHash << endl;
+    cout << "Hashing input: " << inputHash << endl;
     int secret = 1673;
 
-    unsigned int mixing = 2761;
+    unsigned int mixing = 5761;
     for(int i = 0; i < inputHash.size(); i++){
-        mixing = mixing * inputHash.at(i) - secret * inputHash.length();
+        mixing = mixing * inputHash.at(i) - secret * inputHash.length() + inputHash.front() - (mixing % 10);
     }
-    cout << mixing << endl;
+    //cout << mixing << endl;
 
     string mixingString = to_string(mixing);
     
-    int variable = 15;
+    int variable = 7;
 
-    while(mixingString.length() != 64){
-        int a = mixing / variable + secret / variable;
-        mixingString += to_string(a);
+    while(mixingString.size() != 64){
+        int a = mixing / variable - secret / variable; 
+        mixingString += to_string(a % 10);
         variable++;
-    }
+    };
     
-    cout << mixingString << endl;
+    //cout << mixingString << endl;
 
     bitset<256> initialSet(HexToBin(mixingString));
 
@@ -194,5 +211,5 @@ void hashFunction(string inputHash){
         binaryToHex += BinToHex(converting);
     
     };
-    cout << binaryToHex;
+    cout << "Hex: " << binaryToHex << endl;
 };
