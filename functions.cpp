@@ -164,7 +164,14 @@ string BinToHex(string hexdec)
 void hashFunction(string inputHash){
 
     cout << inputHash << endl;
-    cout << countWords(inputHash) << endl;
+    int secret = 1673;
 
-    
+    unsigned int mixing = 2761;
+    for(int i = 0; i < inputHash.size(); i++){
+        mixing = mixing * inputHash.at(i) - secret * inputHash.length();
+    }
+    cout << mixing;
+
+    string secretString = to_string(mixing);
+
 };

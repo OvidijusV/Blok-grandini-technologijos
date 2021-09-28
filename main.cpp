@@ -16,7 +16,7 @@ int main(){
         string input;
         cout << "Enter your text: ";
         getline (cin, input);
-        //hashFunction(input);
+        hashFunction(input);
 
 
     }
