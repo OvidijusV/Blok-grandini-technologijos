@@ -48,4 +48,6 @@ tenkinamas taip vadinamas lavinos efektas (angl. Avalanche effect).
 ```
 * #### Patikriname tuščio failo gaunamą hex'ą:
 ![image](https://user-images.githubusercontent.com/72629961/135327426-c1de32ab-cf07-4adb-8730-51082ab2d972.png)
+* #### Išmatuojame kiek laiko užtruko failo "konstitucija.txt" kiekvienos eilutės hash'inimas:
+![image](https://user-images.githubusercontent.com/72629961/135345245-233ab78f-f50f-4f57-a55b-288e25dbb323.png)
 
