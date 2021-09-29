@@ -1,7 +1,7 @@
 #include "declarations.h"
 
 void checkChoice(int &choice) {
-    while(choice != 1 && choice != 2 && choice != 3 && choice != 4){
+    while(choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5){
         cout << "Wrong choice. It can be only (1) or (2)." << endl;
         cout << "Repeat your choice: ";
         cin >> choice;
@@ -179,9 +179,9 @@ void generateFile(string fileName, int numOfChar){
 
 
 
-void hashFunction(string inputHash){
+string hashFunction(string inputHash){
 
-    cout << "Hashing input: " << inputHash << endl;
+    //cout << "Hashing input: " << inputHash << endl;
     int secret = 1673;
 
     unsigned int mixing = 5761;
@@ -212,7 +212,8 @@ void hashFunction(string inputHash){
         binaryToHex += BinToHex(converting);
     
     };
-    cout << "Hex: " << binaryToHex << endl;
+    //cout << "Hex: " << binaryToHex << endl;
+    return binaryToHex;
 };
 
 void hashKonstitucija(){
@@ -253,4 +254,76 @@ void hashKonstitucija(){
 
     cout << "Time spent hashing every line of file konstitucija.txt: " << timeSpent << "s." << endl;
     cout << "Number of lines hashed: " << lines;
+};
+
+void collisionTest(){
+
+    static const char alphanum[] =
+            "0123456789"
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            "abcdefghijklmnopqrstuvwxyz";
+
+    int numOfCollisions = 0;
+
+    for(int i = 0; i < 25000; i++){
+        string pair1;
+        string pair2;
+
+        for (int i = 0; i < 10; ++i) {
+            pair1+= alphanum[rand() % (sizeof(alphanum) - 1)];
+            pair2+= alphanum[rand() % (sizeof(alphanum) - 1)];
+        };
+        if(hashFunction(pair1) == hashFunction(pair2))
+            numOfCollisions++;
+
+        pair1.clear();
+        pair2.clear();
+    };
+
+    for(int i = 0; i < 25000; i++){
+        string pair1;
+        string pair2;
+
+        for (int i = 0; i < 100; ++i) {
+            pair1+= alphanum[rand() % (sizeof(alphanum) - 1)];
+            pair2+= alphanum[rand() % (sizeof(alphanum) - 1)];
+        };
+        if(hashFunction(pair1) == hashFunction(pair2))
+            numOfCollisions++;
+
+        pair1.clear();
+        pair2.clear();
+    };
+
+    for(int i = 0; i < 25000; i++){
+        string pair1;
+        string pair2;
+
+        for (int i = 0; i < 500; ++i) {
+            pair1+= alphanum[rand() % (sizeof(alphanum) - 1)];
+            pair2+= alphanum[rand() % (sizeof(alphanum) - 1)];
+        };
+        if(hashFunction(pair1) == hashFunction(pair2))
+            numOfCollisions++;
+
+        pair1.clear();
+        pair2.clear();
+    };
+
+    for(int i = 0; i < 25000; i++){
+        string pair1;
+        string pair2;
+
+        for (int i = 0; i < 1000; ++i) {
+            pair1+= alphanum[rand() % (sizeof(alphanum) - 1)];
+            pair2+= alphanum[rand() % (sizeof(alphanum) - 1)];
+        };
+        if(hashFunction(pair1) == hashFunction(pair2))
+            numOfCollisions++;
+
+        pair1.clear();
+        pair2.clear();
+    };
+
+    cout << "Number of collisions found: " << numOfCollisions;
 }
