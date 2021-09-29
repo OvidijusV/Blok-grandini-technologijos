@@ -50,4 +50,8 @@ tenkinamas taip vadinamas lavinos efektas (angl. Avalanche effect).
 ![image](https://user-images.githubusercontent.com/72629961/135327426-c1de32ab-cf07-4adb-8730-51082ab2d972.png)
 * #### Išmatuojame kiek laiko užtruko failo "konstitucija.txt" kiekvienos eilutės hash'inimas:
 ![image](https://user-images.githubusercontent.com/72629961/135345245-233ab78f-f50f-4f57-a55b-288e25dbb323.png)
+* #### Tikriname hash funkcijos atsparumą kolizijai
+Sugeneruota 100 000 atsitiktinių simbolių eilučių porų. 25 000 porų po 10 simbolių, 25 000 porų po 100 simbolių, 25 000 porų po 500 simbolių ir 25 000 porų po 1000 simbolių
+Neivienos poros hash'as nesutapo
+![image](https://user-images.githubusercontent.com/72629961/135348904-644cf468-8bc8-4aca-9c8c-b5bf4e7c397d.png)
 
