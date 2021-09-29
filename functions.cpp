@@ -1,10 +1,11 @@
 #include "declarations.h"
 
 void checkChoice(int &choice) {
-    while(choice != 1 && choice != 2 && choice != 3){
+    while(choice != 1 && choice != 2 && choice != 3 && choice != 4){
         cout << "Wrong choice. It can be only (1) or (2)." << endl;
         cout << "Repeat your choice: ";
-        cin >> choice; 
+        cin >> choice;
+        
     }
 };
 
@@ -213,3 +214,43 @@ void hashFunction(string inputHash){
     };
     cout << "Hex: " << binaryToHex << endl;
 };
+
+void hashKonstitucija(){
+
+    string line;
+
+    ifstream konstitucija;
+
+    try
+    {
+        string pavadinimas = "konstitucija.txt";
+        konstitucija.open(pavadinimas);
+        if(!konstitucija.is_open())
+            throw 1;
+        else cout << "Reading file..." << endl;
+    }
+    catch(int error)
+    {
+        std::cout << "Could not find file named konstitucija.txt" << endl;
+        cout << "Closing the program...";
+        exit(0);
+    }
+
+    double timeSpent = 0;
+    int lines = 0;
+    while(true){
+        getline(konstitucija, line);
+        Timer t;
+        hashFunction(line);
+        timeSpent += t.elapsed();
+        lines++;
+        t.reset();
+
+        if(konstitucija.eof())
+            break;
+    
+    };
+
+    cout << "Time spent hashing every line of file konstitucija.txt: " << timeSpent << "s." << endl;
+    cout << "Number of lines hashed: " << lines;
+}

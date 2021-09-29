@@ -4,7 +4,7 @@ int main(){
 
     int choice;
     cout << "***** HASH GENERATOR *****" << endl;
-    cout << "1. Read text from file" << endl << "2. Input text here" << endl << "3. Test1"<< endl << "Your choice: ";
+    cout << "1. Read text from file" << endl << "2. Input text here" << endl << "3. Test1"<< endl << "4. Benchmark hashing konstitucija.txt" << endl << "Your choice: ";
     cin >> choice;
     cin.ignore();
     checkChoice(choice);
@@ -33,6 +33,9 @@ int main(){
         hashFunction(readFile("test1500a.txt"));
         hashFunction(readFile("test1500b.txt"));
         hashFunction(readFile("testempty.txt"));
+    }
+    else if(choice == 4){
+        hashKonstitucija();
     }
 
     return 0;
