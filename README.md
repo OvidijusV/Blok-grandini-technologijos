@@ -20,7 +20,7 @@ tenkinamas taip vadinamas lavinos efektas (angl. Avalanche effect).
   * Iš skilties "releases" pasirinkti norimą programos versiją ir atsisiųsti
   * Atsisiųstą kodą sukompiliuoti per komandinę eilutę (CMD) arba naudojamu IDE
   ```
-  g++ -o programa main.cpp functions.cpp
+  g++ main.cpp functions.cpp md5.cpp sha256.cpp -o programa
   ```
   * Paleisti gautą vykdomąjį failą (.exe)
   ```
@@ -56,4 +56,12 @@ Neivienos poros hash'as nesutapo
 ![image](https://user-images.githubusercontent.com/72629961/135348904-644cf468-8bc8-4aca-9c8c-b5bf4e7c397d.png)
 * #### Tikriname ar hash funkcija tenkina "Avalanche effect":
 Sugeneruota 100 000 atsiktinių simbolių eilučių porų kurių ilgis 700 ir kurios skirtusi tik pirmu simboliu. Randame mažiausius ir didžiausius skirtumus bit'ų, bei hex'ų lygmenyje ir apskaičiuojame vidurkines skirtingumo reikšmes
-
+![image](https://user-images.githubusercontent.com/72629961/135496622-a75f6b1f-ddc9-4169-8101-e04ea633f1a4.png)
+## Išvados
+Sukurta hash funkcija atitinka visus užduoties keliamus reikalavimus t.y:
+* Hash funkcijos įvedimas galit būti bet kokio ilgio, tačiau išvedimas yra visuomet tokio paties dydžio - 64 simbolių hex'as.
+* Hash funkcija yra deterministinė. Tam pačiam įvedimui visuomet toks pat išvedimas.
+* Hash funkcija yra sąlyginai greita ir efektyvi, tačiau mano sukurta hash funkcija yra letesnė, nei MD5 ir SHA-256 hash funkcijos. 
+* Iš hash funkcijos išvedimo, neįmanoma surasti įvesties reikšmės.
+* Hash funkcija yra atspari kolizijai.
+* Bent minimaliai pakeitus įvedimą, gaunama išvestis visiškai skirtinga
