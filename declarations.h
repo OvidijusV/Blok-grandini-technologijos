@@ -34,6 +34,7 @@ void generateFile(string fileName, int numOfChar);
 string hashFunction(string inputHash);
 void hashKonstitucija();
 void collisionTest();
+void avalancheTest();
 
 
 #endif

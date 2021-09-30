@@ -1,7 +1,9 @@
 #include "declarations.h"
+#include "md5.h"
+#include "sha256.h"
 
 void checkChoice(int &choice) {
-    while(choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5){
+    while(choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6){
         cout << "Wrong choice. It can be only (1) or (2)." << endl;
         cout << "Repeat your choice: ";
         cin >> choice;
@@ -238,6 +240,8 @@ void hashKonstitucija(){
     }
 
     double timeSpent = 0;
+    double timeSpentMD5 = 0;
+    double timeSpentSHA256 = 0;
     int lines = 0;
     while(true){
         getline(konstitucija, line);
@@ -247,12 +251,24 @@ void hashKonstitucija(){
         lines++;
         t.reset();
 
+        Timer t1;
+        md5(line);
+        timeSpentMD5 += t1.elapsed();
+        t1.reset();
+
+        Timer t2;
+        sha256(line);
+        timeSpentSHA256 += t2.elapsed();
+        t2.reset();
+
         if(konstitucija.eof())
             break;
     
     };
 
     cout << "Time spent hashing every line of file konstitucija.txt: " << timeSpent << "s." << endl;
+    cout << "Time spent hashing every line of file konstitucija.txt with MD5: " << timeSpentMD5 << "s." << endl;
+    cout << "Time spent hashing every line of file konstitucija.txt with SHA256 " << timeSpentSHA256 << "s." << endl;
     cout << "Number of lines hashed: " << lines;
 };
 
@@ -326,4 +342,92 @@ void collisionTest(){
     };
 
     cout << "Number of collisions found: " << numOfCollisions;
+};
+
+void avalancheTest(){
+
+    static const char alphanum[] =
+            "0123456789"
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            "abcdefghijklmnopqrstuvwxyz";
+
+    int bitSize = 256;
+    int hexSize = 64;
+    int bitMax = 0;
+    int bitMin = 256;
+    int bitDifferAll = 0;
+    int hexMax = 0;
+    int hexMin = 64;
+    int hexDifferAll = 0;
+    double avgHexPairs;
+    double avgBitPairs;
+
+
+    for(int i = 0; i < 100000; i++){
+        string initPair;
+        string pair1;
+        string pair2;
+        string hexPair1;
+        string hexPair2;
+        string bitPair1;
+        string bitPair2;
+        int bitDiffer = 0;
+        int hexDiffer = 0;
+
+
+        for (int i = 0; i < 699; ++i) {
+            initPair = alphanum[rand() % (sizeof(alphanum) - 1)];
+            pair1 += "a" + initPair;
+            pair2 += "b" + initPair;
+        };
+        
+        bitPair1 = HexToBin(hashFunction(pair1));
+        bitPair2 = HexToBin(hashFunction(pair2));
+
+        hexPair1 = hashFunction(pair1);
+        hexPair2 = hashFunction(pair2);
+
+        for(int j = 0; j < bitSize; j++){
+            if(bitPair1[j] != bitPair2[j])
+                bitDiffer++;
+        }
+
+        if(bitDiffer < bitMin)
+            bitMin = bitDiffer;
+        if(bitDiffer > bitMax)
+            bitMax = bitDiffer;
+
+        bitDifferAll += bitDiffer;
+
+        for(int k = 0; k < hexSize; k++){
+            if(hexPair1[k] != hexPair2[k])
+                hexDiffer++;
+        }
+
+        if(hexDiffer < hexMin)
+            hexMin = hexDiffer;
+        if(hexDiffer > hexMax)
+            hexMax = hexDiffer;
+
+        hexDifferAll += hexDiffer;
+
+        pair1.clear();
+        pair2.clear();
+        bitPair1.clear();
+        bitPair2.clear();
+        hexPair1.clear();
+        hexPair2.clear();
+        initPair.clear();
+    };
+
+    avgHexPairs = (double(hexDifferAll) / double(64)) / 100000 * 100;
+    avgBitPairs = (double(bitDifferAll) / double(256)) / 100000 * 100;
+
+    cout << "Min difference in hex pairs: " << hexMin << endl;
+    cout << "Min difference in bit pairs: " << bitMin << endl;
+    cout << "Max difference in hex pairs: " << hexMax << endl;
+    cout << "Max difference in bit pairs: " << bitMax << endl;
+    cout << "Average difference in hex pairs: " << avgHexPairs << "%" << endl; 
+    cout << "Average difference in bit pairs: " << avgBitPairs << "%" << endl;
+
 }
