@@ -48,10 +48,12 @@ tenkinamas taip vadinamas lavinos efektas (angl. Avalanche effect).
 ```
 * #### Patikriname tuščio failo gaunamą hex'ą:
 ![image](https://user-images.githubusercontent.com/72629961/135327426-c1de32ab-cf07-4adb-8730-51082ab2d972.png)
-* #### Išmatuojame kiek laiko užtruko failo "konstitucija.txt" kiekvienos eilutės hash'inimas:
-![image](https://user-images.githubusercontent.com/72629961/135345245-233ab78f-f50f-4f57-a55b-288e25dbb323.png)
+* #### Išmatuojame kiek laiko užtruko failo "konstitucija.txt" kiekvienos eilutės hash'inimas ir palyginame su MD5, bei SHA-256 hash funkcijų sparta:
+![image](https://user-images.githubusercontent.com/72629961/135489591-9a1d2450-157e-494e-a594-50b345d50aa3.png)
 * #### Tikriname hash funkcijos atsparumą kolizijai
 Sugeneruota 100 000 atsitiktinių simbolių eilučių porų. 25 000 porų po 10 simbolių, 25 000 porų po 100 simbolių, 25 000 porų po 500 simbolių ir 25 000 porų po 1000 simbolių.
 Neivienos poros hash'as nesutapo
 ![image](https://user-images.githubusercontent.com/72629961/135348904-644cf468-8bc8-4aca-9c8c-b5bf4e7c397d.png)
+* #### Tikriname ar hash funkcija tenkina "Avalanche effect":
+Sugeneruota 100 000 atsiktinių simbolių eilučių porų kurių ilgis 700 ir kurios skirtusi tik pirmu simboliu. Randame mažiausius ir didžiausius skirtumus bit'ų, bei hex'ų lygmenyje ir apskaičiuojame vidurkines skirtingumo reikšmes
 
